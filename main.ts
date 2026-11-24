@@ -15,6 +15,11 @@ const PITCH =
   "We lease trained goats to mow corporate lawns and shred confidential documents — facilities pays per acre, because a goat never leaks, never unionizes, and fertilizes while it works.\n";
 
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
+const PITCH_BODY = PITCH.trimEnd();
+if (PITCH_BODY.length > 200) {
+  console.error(`PITCH exceeds the 200-character limit: ${PITCH_BODY.length} characters`);
+  process.exit(1);
+}
 mkdirSync(outDir, { recursive: true });
 writeFileSync(join(outDir, "entry.txt"), PITCH, "utf8");
 console.log(PITCH.trimEnd());
